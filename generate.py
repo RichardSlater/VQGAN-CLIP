@@ -9,6 +9,7 @@ from urllib.request import urlopen
 from tqdm import tqdm
 import sys
 import os
+import shutil
 
 # pip install taming-transformers doesn't work with Gumbel, but does not yet work with coco etc
 # appending the path does work with Gumbel, but gives ModuleNotFoundError: No module named 'transformers' for coco etc
@@ -713,7 +714,8 @@ def checkin(i, losses):
     out = synth(z)
     info = PngImagePlugin.PngInfo()
     info.add_text('comment', f'{args.prompts}')
-    TF.to_pil_image(out[0].cpu()).save(args.output, pnginfo=info) 	
+    TF.to_pil_image(out[0].cpu()).save(args.output, pnginfo=info)
+    shutil.copy(args.output, f'iterations/{i:04d}.png')
 
 
 def ascend_txt():

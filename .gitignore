@@ -17,3 +17,6 @@ steps/
 # Files
 output.png
 steps.mp4
+/output
+/flickr30k_images
+/iterations
